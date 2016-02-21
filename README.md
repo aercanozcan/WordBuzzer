@@ -10,19 +10,20 @@ or listening sound effects on internet
 
 ### Decisions made to solve certain aspects of the game
 * I used same animation code to make a good enough intro screen. That bought me some time.
-* I used Application class to hold referenc to word.json
+* I used Application class to hold reference to word.json
 
 ### Decisions made because of restriced time
 
-* I made an expanding animation instead of making a proper dialog screen.
-* I did not use any database
-* I was planing to make the game playeble for both languages but I ended up making it english to spanish.
+* I made an expanding animation instead of making a proper dialog screen for game ending.
+* I did not use any database or persistent data.
+* I was planing to make the game playable for both languages but I ended up making it english to spanish.
 * I skipped the styling
 
 ### What would be the first thing to improve or add if there had been more time
 
-* I would move json data to a proper database or orm.
+* I would move json data to a proper database.
 * I would make a better styling for application
 * Make the game to be playable for both languages or any other language combination since design is not messed up, it can be implemented.
-* A better winning feedback to player.
-* I wanted to play Guile Theme song from street fighter 2 when a player is 1 score away from winning the game.
+* Implementing a better winning feedback for player.
+* I wanted to play Guile Theme song from Street Fighter 2 when a player is 1 score away from winning the game.
+* I could write some unit tests instead of running the application blindly.
