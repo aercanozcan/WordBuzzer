@@ -55,16 +55,25 @@ public class MediaManager {
         mainTheme.release();
     }
 
+    /**
+     * wrong answer feedback sound
+     */
     public void playBuzzer() {
         effects = MediaPlayer.create(context, R.raw.buzzer);
         effects.start();
     }
 
+    /**
+     * correct answer feedback sound
+     */
     public void playCorrect() {
         effects = MediaPlayer.create(context, R.raw.correct);
         effects.start();
     }
 
+    /**
+     * game end feedback sound
+     */
     public void playWin() {
         effects = MediaPlayer.create(context, R.raw.win_sound);
         effects.start();

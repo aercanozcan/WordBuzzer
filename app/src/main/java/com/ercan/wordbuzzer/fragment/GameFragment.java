@@ -319,7 +319,7 @@ public class GameFragment extends Fragment implements Game.GameListener {
     public void wrongAnswerFeedback(final View playerButton) {
         MediaManager.getInstance(getActivity()).playBuzzer();
         ObjectAnimator
-                .ofFloat(playerButton, "translationX", 0, 25, -25, 25, -25, 15, -15, 6, -6, 25, -25, 25, -25, 15, -15, 6, -6, 0)
+                .ofFloat(playerButton, "translationX", 0, 25, -25, 25, -25, 15, -15, 6, -6, 25, -25, 25, -25, 15, -15, 6, -6, 0)//vibration like animation
                 .setDuration(DEFAULT_ANIM_DURATION * 5)
                 .start();
         ObjectAnimator vibrateVertical = ObjectAnimator
@@ -343,6 +343,11 @@ public class GameFragment extends Fragment implements Game.GameListener {
     }
 
 
+    /**
+     * the winners button will scale and cover all the screen. It will navigate user to main menu on click.
+     *
+     * @param playerButton
+     */
     public void gameEndFeedBack(final View playerButton) {
         MediaManager.getInstance(getActivity()).playWin();
         playerButton.bringToFront();//it will float above all other views
@@ -362,7 +367,6 @@ public class GameFragment extends Fragment implements Game.GameListener {
             public void onAnimationStart(Animator animation) {
                 super.onAnimationStart(animation);
                 playerButton.setEnabled(false);//to prevent early click
-
             }
 
             @Override
@@ -382,7 +386,7 @@ public class GameFragment extends Fragment implements Game.GameListener {
             }
         });
         enablePlayers(false);//disable all players
-        playerButton.setEnabled(true);//except this one
+
 
     }
 }

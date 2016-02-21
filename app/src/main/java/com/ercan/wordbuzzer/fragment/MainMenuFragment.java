@@ -51,6 +51,7 @@ public class MainMenuFragment extends Fragment {
     int animationCount = 0;
     private SharePrefUtils sharePrefUtils;// only for sound preference for now
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,7 +60,7 @@ public class MainMenuFragment extends Fragment {
         sharePrefUtils = StoreBox.create(getActivity(), SharePrefUtils.class);
         swSound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {//play or stop
                 if (isChecked) {
                     MediaManager.getInstance(getActivity()).playMainTheme();
                 } else {
@@ -68,7 +69,7 @@ public class MainMenuFragment extends Fragment {
                 sharePrefUtils.setSound(isChecked);
             }
         });
-        swSound.setChecked(sharePrefUtils.getSound());
+        swSound.setChecked(sharePrefUtils.getSound());// previous preference
 
 
         return rootView;
@@ -106,7 +107,7 @@ public class MainMenuFragment extends Fragment {
 
         ObjectAnimator enterFromLeft = ObjectAnimator.
                 ofFloat(txtAnswer, "translationX", -txtAnswer.getWidth(), rootView.getWidth() + txtAnswer.getWidth());
-        enterFromLeft.setDuration(new Random().nextInt(2001) + 1000);//random duration between 1000-3000 ms
+        enterFromLeft.setDuration(new Random().nextInt(1001) + 2000);//random duration between 1000-3000 ms
         enterFromLeft.setInterpolator(new LinearInterpolator());
         enterFromLeft.addListener(new WordBuzzerAnimatorListener() {
             @Override
@@ -115,7 +116,7 @@ public class MainMenuFragment extends Fragment {
                     prepareForSlide();
                     enterFromRight();
                 } catch (Exception e) {//to prevent callback after fragment removed
-
+                    animation.removeAllListeners();
                 }
             }
         });
@@ -131,7 +132,7 @@ public class MainMenuFragment extends Fragment {
         ObjectAnimator enterFromRight = ObjectAnimator.
                 ofFloat(txtAnswer, "translationX", rootView.getWidth() + txtAnswer.getWidth(), -txtAnswer.getWidth());
         enterFromRight.setInterpolator(new LinearInterpolator());
-        enterFromRight.setDuration(new Random().nextInt(2001) + 1000);//random duration between 1000-3000 ms
+        enterFromRight.setDuration(new Random().nextInt(1001) + 2000);//random duration between 1000-3000 ms
         enterFromRight.addListener(new WordBuzzerAnimatorListener() {
             @Override
             public void onAnimationEnd(Animator animation) {
@@ -139,7 +140,7 @@ public class MainMenuFragment extends Fragment {
                     prepareForSlide();
                     enterFromLeft();
                 } catch (Exception e) {//to prevent callback after fragment removed
-
+                    animation.removeAllListeners();
                 }
 
             }
@@ -165,6 +166,9 @@ public class MainMenuFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
 
-
+    }
 }
