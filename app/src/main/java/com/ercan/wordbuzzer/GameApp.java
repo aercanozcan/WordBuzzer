@@ -32,6 +32,6 @@ public class GameApp extends Application {
     private void prepareWords() {
         Type listType = new TypeToken<List<Word>>() {
         }.getType();
-        words = new Gson().fromJson(CommonUtils.readFileFromAssets(this, WORDS_PATH), listType);
+        words = new Gson().fromJson(CommonUtils.readFileFromAssets(getAssets(), WORDS_PATH), listType);
     }
 }

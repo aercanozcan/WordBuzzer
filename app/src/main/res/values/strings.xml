@@ -3,6 +3,12 @@
     <string name="game_title_part1">WORD</string>
     <string name="game_title_part2">BUZZER!</string>
     <string name="title_start">START</string>
-    <string name="title_sound">Sound  </string>
-
+    <string name="title_sound">Sound</string>
+    <string name="title_join">Click those cool buttons to join</string>
+    <string name="player1_name">Leonardo</string>
+    <string name="player2_name">Michelangelo</string>
+    <string name="player3_name">Rafael</string>
+    <string name="player4_name">Donatello</string>
+    <string name="btn_start_title">START</string>
+    <string name="toast_player_needed">Some one has to play it right?</string>
 </resources>

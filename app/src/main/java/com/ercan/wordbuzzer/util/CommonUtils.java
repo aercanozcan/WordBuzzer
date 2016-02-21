@@ -1,8 +1,12 @@
 package com.ercan.wordbuzzer.util;
 
 import android.content.Context;
+import android.content.res.AssetManager;
+
+import com.ercan.wordbuzzer.R;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -12,30 +16,57 @@ import java.io.InputStreamReader;
  */
 public class CommonUtils {
 
+
     /**
-     * Reads File from assets and returns as string
+     * Reads the text of an asset. Should not be run on the UI thread.
      *
-     * @param context
+     * @param mgr
+     *            The {@link AssetManager} obtained via {@link Context#getAssets()}
      * @param path
-     * @return file as String or empty String
+     *            The path to the asset.
+     * @return The plain text of the asset
      */
-    public static String readFileFromAssets(Context context, String path) {
+    public static String readFileFromAssets(AssetManager mgr, String path) {
+        String contents = "";
+        InputStream is = null;
+        BufferedReader reader = null;
         try {
-            StringBuilder buf = new StringBuilder();
-            InputStream json = context.getAssets().open(path);
-            BufferedReader in = null;
-            in = new BufferedReader(new InputStreamReader(json, "UTF-8"));
-            String str;
-
-            while ((str = in.readLine()) != null) {
-                buf.append(str);
+            is = mgr.open(path);
+            reader = new BufferedReader(new InputStreamReader(is));
+            contents = reader.readLine();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                contents += '\n' + line;
             }
-
-            in.close();
-            return str;
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
+        } finally {
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (IOException ignored) {
+                }
+            }
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException ignored) {
+                }
+            }
         }
-        return "";
+        return contents;
+    }
+
+    public static int getDrawableIdforScore(int score) {
+        switch (score) {
+            case 1:
+                return R.drawable.one;
+            case 2:
+                return R.drawable.two;
+            case 3:
+                return R.drawable.win;
+            default:
+                return R.drawable.win;
+        }
     }
 }
